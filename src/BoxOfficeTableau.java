@@ -32,7 +32,7 @@ public class BoxOfficeTableau extends BoxOffice {
             }else{
                 boolean add = false;
                 for (int i = 0 ; i < getCptFilm() ; i++){
-                    if (elements[i].getTitre().equals(titre)){ // Si le film est déjà dans le tableau,
+                    if (elements[i].getTitre().equals(titre) && elements[i].getRéalisateur().equals(réalisateur)){ // Si le film est déjà dans le tableau,
                         elements[i].setNbEntrées(nbEntrées); // On augmente son nombre d'entrées.
                         add = true;
                     }
