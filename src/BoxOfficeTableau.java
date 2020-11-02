@@ -78,6 +78,7 @@ public class BoxOfficeTableau extends BoxOffice {
         if (args.length < 1)
             System.out.println("Pas de fichier");
         else {
+            long start = System.currentTimeMillis();
             BoxOfficeTableau bo = new BoxOfficeTableau(args[0]);
             System.out.println("Fichier : " + args[0]);
             System.out.println("Nombre de lignes : " + bo.getNbLine());
@@ -85,6 +86,8 @@ public class BoxOfficeTableau extends BoxOffice {
             System.out.println("----------");
             System.out.println("Films comptabilisant le plus grand nombre d’entrées :");
             bo.top3();
+            long time = System.currentTimeMillis() - start;
+            System.out.println("Temps d'execution : " + time + "ms");
         }
     }
 }
