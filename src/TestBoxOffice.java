@@ -1,8 +1,8 @@
-package Part1;
+import java.io.IOException;
 
 public class TestBoxOffice extends BoxOffice {
 
-    public TestBoxOffice(String listing) {
+    public TestBoxOffice(String listing) throws IOException{
         super(listing);
     }
 
@@ -11,7 +11,7 @@ public class TestBoxOffice extends BoxOffice {
                 +réalisateur+" Entrees: "+nbEntrées);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         if (args.length < 1)
             System.out.println("Pas de fichier");
         else

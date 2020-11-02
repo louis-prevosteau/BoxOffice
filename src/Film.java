@@ -1,5 +1,3 @@
-package Part1;
-
 public class Film {
 
     private String titre, réalisateur;
