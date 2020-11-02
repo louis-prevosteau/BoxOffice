@@ -27,6 +27,6 @@ public class Film {
     }
 
     public void setNbEntrées(int nbEntrées) {
-        this.nbEntrées += nbEntrées;
+        this.nbEntrées += nbEntrées; // On ajoute le nombre d'entrées au nombre d'entrées précédent.
     }
 }

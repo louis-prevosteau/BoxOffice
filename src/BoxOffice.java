@@ -9,7 +9,7 @@ public abstract class BoxOffice {
     public BoxOffice(String listing) throws FileNotFoundException {
         Scanner in = new Scanner(new File(listing));
 
-        while (in.hasNextLine()){ 
+        while (in.hasNextLine()){ // Lecture du fichier
             String line = in.nextLine();
             in.skip("FILM : ");
             String titre = in.next();
