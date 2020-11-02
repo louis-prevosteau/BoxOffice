@@ -50,4 +50,41 @@ public class BoxOfficeTableau extends BoxOffice {
                 elements[i] = tmp[i];
         }
     }
+
+    public void swap(int a, int b){
+        Film tmp = new Film(elements[a].getTitre(), elements[a].getRéalisateur(), elements[a].getAnnée(), elements[a].getNbEntrées());
+        elements[a] = new Film(elements[b].getTitre(), elements[b].getRéalisateur(), elements[b].getAnnée(), elements[b].getNbEntrées());
+        elements[b] = tmp;
+    }
+
+    public void triNbEntréesDESC(){
+        for (int i = 1 ; i < getCptFilm() ; i++){
+            int cpt = i;
+            while (cpt > 0 && elements[cpt].getNbEntrées() > elements[cpt - 1].getNbEntrées()){ // Si cpt est plus grand que cpt - 1,
+                swap(cpt, cpt-1); // On échange cpt et cpt - 1
+                cpt--;
+            }
+        }
+    }
+
+    public void top3(){
+        triNbEntréesDESC(); // Tri
+        for (int i = 0 ; i < 3 ; i++){
+            System.out.println("(" + elements[i].getAnnée() + ") " + elements[i].getTitre() + " entrées : " + elements[i].getNbEntrées()); // Affichage
+        }
+    }
+
+    public static void main(String[] args) throws FileNotFoundException{
+        if (args.length < 1)
+            System.out.println("Pas de fichier");
+        else {
+            BoxOfficeTableau bo = new BoxOfficeTableau(args[0]);
+            System.out.println("Fichier : " + args[0]);
+            System.out.println("Nombre de lignes : " + bo.getNbLine());
+            System.out.println("Nombre de films : " + bo.getNbFilms());
+            System.out.println("----------");
+            System.out.println("Films comptabilisant le plus grand nombre d’entrées :");
+            bo.top3();
+        }
+    }
 }
