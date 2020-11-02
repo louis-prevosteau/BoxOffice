@@ -24,10 +24,11 @@ public abstract class BoxOffice {
 
                 this.addFilm(titre, réalisateur, année, nbEtrées);
             }
+            in.close();
         }catch(FileNotFoundException e){
             e.printStackTrace();
+            System.exit(1);
         }
-
     }
 
     public abstract void addFilm(String titre, String réalisateur, int année, int nbEntrées);
