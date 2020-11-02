@@ -1,16 +1,15 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 public abstract class BoxOffice {
 
     private String listing;
 
-    public BoxOffice(String listing) throws IOException {
+    public BoxOffice(String listing) throws FileNotFoundException {
         Scanner in = new Scanner(new File(listing));
 
-        while (in.hasNextLine()){
+        while (in.hasNextLine()){ 
             String line = in.nextLine();
             in.skip("FILM : ");
             String titre = in.next();

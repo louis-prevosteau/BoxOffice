@@ -1,8 +1,8 @@
-import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class TestBoxOffice extends BoxOffice {
 
-    public TestBoxOffice(String listing) throws IOException{
+    public TestBoxOffice(String listing) throws FileNotFoundException{
         super(listing);
     }
 
@@ -11,7 +11,7 @@ public class TestBoxOffice extends BoxOffice {
                 +réalisateur+" Entrees: "+nbEntrées);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws FileNotFoundException {
         if (args.length < 1)
             System.out.println("Pas de fichier");
         else
