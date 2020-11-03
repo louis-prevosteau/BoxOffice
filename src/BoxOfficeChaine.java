@@ -19,13 +19,13 @@ public class BoxOfficeChaine extends BoxOffice{
     @Override
     public void addFilm(String titre, String réalisateur, int année, int nbEntrées) {
         if (elements == null){
-            elements = new FilmChaine(titre, réalisateur, année, nbEntrées);
+            elements = new FilmChaine(titre, réalisateur, année, nbEntrées); // Si la liste chainée n'existe pas, on la créé.
         }
         FilmChaine tmp = getElements();
         FilmChaine previous = getElements();
         while (tmp != null){
-            if (tmp.getTitre().equals(titre) && tmp.getRéalisateur().equals(réalisateur)){
-                tmp.setNbEntrées(nbEntrées);
+            if (tmp.getTitre().equals(titre) && tmp.getRéalisateur().equals(réalisateur)){ // Si le film est dans la liste chainée,
+                tmp.setNbEntrées(nbEntrées); // On incrémente son nombre d'entrées.
             }
             previous = tmp;
             tmp = tmp.getNext();
@@ -33,7 +33,7 @@ public class BoxOfficeChaine extends BoxOffice{
         previous.setNext(new FilmChaine(titre, réalisateur, année, nbEntrées));
     }
 
-    public static Comparator<Film> compareFilm = new Comparator<Film>() {
+    public static Comparator<Film> compareFilm = new Comparator<Film>() { // Comparateur du ombre d'entrées
         @Override
         public int compare(Film f1, Film f2) {
             return f1.getNbEntrées() - f2.getNbEntrées();
@@ -49,7 +49,7 @@ public class BoxOfficeChaine extends BoxOffice{
                 top3.add(tmp);
                 top3.sort(compareFilm);
                 Collections.reverse(top3);
-                if (top3.size() > 3)
+                if (top3.size() > 3) // Si size() est supérieur à 3, alors on ne garde que les 3 premiers films.
                     top3.remove(3);
             }
             tmp = tmp.getNext();
