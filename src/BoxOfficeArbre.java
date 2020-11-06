@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 public class BoxOfficeArbre extends BoxOffice {
@@ -21,26 +22,26 @@ public class BoxOfficeArbre extends BoxOffice {
 
     public FilmArbre searchFilm(String titre, FilmArbre racine){
         if (racine != null){
-            if (titre.hashCode() == racine.key())
+            if (titre.hashCode() == racine.key()) // Film trouvé.
                 return racine;
-            else if (titre.hashCode() >= racine.key())
+            else if (titre.hashCode() >= racine.key()) // Si le film recherché a un plus grand hashCode, on part à droite.
                 return searchFilm(titre, racine.getRight());
-            else if (titre.hashCode() < racine.key())
+            else if (titre.hashCode() < racine.key()) // Sinon, on part à gauche.
                 return searchFilm(titre, racine.getLeft());
         }
         return null;
     }
 
     public void ajouterFilm(String titre, String réalisateur, int année, int nbEntrées, FilmArbre racine){
-        if(titre.hashCode() >= racine.key()){
-            if (racine.getRight() == null)
+        if(titre.hashCode() >= racine.key()){ // Si le film a un plus grand hashCode que le film pointé, alors on va le placer à sa droite.
+            if (racine.getRight() == null) // Si le film pointé n'a pas déjà un fils droit, on l'ajoute en fils droit.
                 racine.setRight(new FilmArbre(titre, réalisateur, année, nbEntrées));
-            else
+            else // Sinon, on pointe le fils droit et on recommence.
                 ajouterFilm(titre, réalisateur, année, nbEntrées, racine.getRight());
-        }else {
-            if (racine.getLeft() == null)
+        }else { // Si le film a un plus petit hashCode que le film pointé, alors on va le placer à sa gauche.
+            if (racine.getLeft() == null) // Si le film pointé n'a pas déjà un fils gauche, on l'ajoute en fils gauche.
                 racine.setLeft(new FilmArbre(titre, réalisateur, année, nbEntrées));
-            else
+            else // Sinon, on pointe le fils gauche et on recommence.
                 ajouterFilm(titre, réalisateur, année, nbEntrées, racine.getLeft());
         }
     }
@@ -52,11 +53,11 @@ public class BoxOfficeArbre extends BoxOffice {
             top3 = new ArrayList<FilmArbre>();
             top3.add(getElements());
         }else {
-            FilmArbre tmp = searchFilm(titre, getElements());
-            if (tmp != null)
-                tmp.setNbEntrées(nbEntrées);
+            FilmArbre tmp = searchFilm(titre, getElements()); // Dans le cas où le film est trouvé, tmp pointera vers le film équivalant.
+            if (tmp != null) // Si le film est trouvé,
+                tmp.setNbEntrées(nbEntrées); // On incrémente son nombre d'entrées.
             else
-                ajouterFilm(titre, réalisateur, année, nbEntrées, getElements());
+                ajouterFilm(titre, réalisateur, année, nbEntrées, getElements()); // Sinon, on ajoute le film.
         }
     }
 
@@ -64,6 +65,43 @@ public class BoxOfficeArbre extends BoxOffice {
         @Override
         public int compare(FilmArbre f1, FilmArbre f2) {
             return f1.getNbEntrées() - f2.getNbEntrées();
+        }
+    };
+
+    public void top3(FilmArbre racine){
+        if (racine.getNbEntrées() >= top3.get(top3.size() - 1).getNbEntrées()){
+            top3.add(racine);
+            top3.sort(compareFilm);
+            Collections.reverse(top3);
+            if (top3.size() >= 3)
+                top3.remove(3);
+        }
+        if (racine.getLeft() == null)
+            top3(racine.getLeft());
+        if (racine.getRight() == null)
+            top3(racine.getRight());
+    }
+
+    public void afficherTop3(){
+        top3(getElements());
+        System.out.println("Films comptabilisant le plus grand nombre d’entrées :");
+        for (int i = 0 ; i < top3.size() ; i++)
+            System.out.println("(" + top3.get(i).getAnnée() + ") " + top3.get(i).getTitre() + " entrées : " + top3.get(i).getNbEntrées());
+    }
+
+    public static void main(String[] args) throws FileNotFoundException{
+        if (args.length < 1)
+            System.out.println("Pas de fichier");
+        else{
+            long start = System.currentTimeMillis();
+            BoxOfficeArbre bo = new BoxOfficeArbre(args[0]);
+            System.out.println("Fichier : " + args[0]);
+            System.out.println("Nombre de lignes : " + bo.getNbLine());
+            System.out.println("Nombre de films : " + bo.getNbFilms());
+            System.out.println("----------");
+            bo.afficherTop3();
+            long time = System.currentTimeMillis() - start;
+            System.out.println("Temps d'execution : " + time + "ms");
         }
     }
 }
