@@ -8,27 +8,39 @@ public abstract class BoxOffice {
     private int nbLine;
     private int nbFilms;
 
-    public BoxOffice(String listing) throws FileNotFoundException {
-        Scanner in = new Scanner(new File(listing));
+    public BoxOffice(String listing) {
+       try {
+           Scanner in = new Scanner(new File(listing));
+           in.useDelimiter("\t");
 
-        while (in.hasNextLine()){ // Lecture du fichier
-            String line = in.nextLine();
-            nbLine++;
-            in.skip("FILM : ");
-            String titre = in.next();
-            in.skip("REALISATEUR : ");
-            String réalisateur = in.next();
-            in.skip("ANNEE : ");
-            int année = in.nextInt();
-            int nbEtrées = in.nextInt();
-            Scanner scannerFilm = new Scanner(line);
-            while (scannerFilm.hasNext()){
-                String myFilm = scannerFilm.next();
-                nbFilms++;
-            }
-            scannerFilm.close();
-        }
-        in.close();
+           while (in.hasNextLine()){ // Lecture du fichier
+               String line = in.nextLine();
+               if (line.length() < 5)
+                   break;
+               nbLine++;
+               String[] film = line.split("\t");
+               String titre = film[0].substring(6);
+               String réalisateur = film[1].substring(14);
+               String tmp = film[2].substring(8);
+               int année = Integer.parseInt(tmp);
+               String ville = film[3];
+               String tmp2 = film[4].substring(9);
+               int nbEtrées = Integer.parseInt(tmp2);
+               addFilm(titre,réalisateur,année,nbEtrées);
+               Scanner scannerFilm = new Scanner(line);
+               while (scannerFilm.hasNext()){
+                   String myFilm = scannerFilm.next();
+                   nbFilms++;
+               }
+               scannerFilm.close();
+
+           }
+           in.close();
+       }catch (FileNotFoundException e){
+           e.printStackTrace();
+       }catch (NumberFormatException e){
+           e.printStackTrace();
+       }
     }
 
     public int getNbLine() {

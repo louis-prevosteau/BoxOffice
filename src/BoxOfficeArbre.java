@@ -54,8 +54,10 @@ public class BoxOfficeArbre extends BoxOffice {
             top3.add(getElements());
         }else {
             FilmArbre tmp = searchFilm(titre, getElements()); // Dans le cas où le film est trouvé, tmp pointera vers le film équivalant.
-            if (tmp != null) // Si le film est trouvé,
+            if (tmp != null){ // Si le film est trouvé,
                 tmp.setNbEntrées(nbEntrées); // On incrémente son nombre d'entrées.
+                return;
+            }
             else
                 ajouterFilm(titre, réalisateur, année, nbEntrées, getElements()); // Sinon, on ajoute le film.
         }
@@ -73,7 +75,7 @@ public class BoxOfficeArbre extends BoxOffice {
             top3.add(racine);
             top3.sort(compareFilm);
             Collections.reverse(top3);
-            if (top3.size() >= 3)
+            if (top3.size() > 3)
                 top3.remove(3);
         }
         if (racine.getLeft() == null)

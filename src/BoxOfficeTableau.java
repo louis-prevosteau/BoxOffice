@@ -82,7 +82,7 @@ public class BoxOfficeTableau extends BoxOffice {
             BoxOfficeTableau bo = new BoxOfficeTableau(args[0]);
             System.out.println("Fichier : " + args[0]);
             System.out.println("Nombre de lignes : " + bo.getNbLine());
-            System.out.println("Nombre de films : " + bo.getNbFilms());
+            System.out.println("Nombre de films : " + bo.getCptFilm());
             System.out.println("----------");
             System.out.println("Films comptabilisant le plus grand nombre d’entrées :");
             bo.top3();
