@@ -7,6 +7,7 @@ public class BoxOfficeChaine extends BoxOffice{
 
     private FilmChaine elements;
     private ArrayList<Film> top3;
+    private static int cptFilm = 1;
 
     public BoxOfficeChaine(String listing) throws FileNotFoundException {
         super(listing);
@@ -14,6 +15,14 @@ public class BoxOfficeChaine extends BoxOffice{
 
     public FilmChaine getElements() {
         return elements;
+    }
+
+    public static int getCptFilm() {
+        return cptFilm;
+    }
+
+    public static void setCptFilm(int cptFilm) {
+        BoxOfficeChaine.cptFilm = cptFilm;
     }
 
     @Override
@@ -32,6 +41,7 @@ public class BoxOfficeChaine extends BoxOffice{
             tmp = tmp.getNext();
         }
         previous.setNext(new FilmChaine(titre, réalisateur, année, nbEntrées));
+        setCptFilm(getCptFilm() + 1);
     }
 
     public static Comparator<Film> compareFilm = new Comparator<Film>() { // Comparateur du ombre d'entrées
@@ -67,7 +77,7 @@ public class BoxOfficeChaine extends BoxOffice{
             BoxOfficeChaine bo = new BoxOfficeChaine(args[0]);
             System.out.println("Fichier : " + args[0]);
             System.out.println("Nombre de lignes : " + bo.getNbLine());
-            System.out.println("Nombre de films : " + bo.getNbFilms());
+            System.out.println("Nombre de films : " + bo.getCptFilm());
             System.out.println("----------");
             System.out.println("Films comptabilisant le plus grand nombre d’entrées :");
             bo.top3();
