@@ -7,10 +7,19 @@ public class BoxOfficeHash extends BoxOffice {
 
     private FilmChaine[] elements;
     private ArrayList<FilmChaine> top3;
+    private static int cptFilms = 1;
     public final int SIZE = 1000000;
 
     public BoxOfficeHash(String listing) throws FileNotFoundException {
         super(listing);
+    }
+
+    public static int getCptFilms() {
+        return cptFilms;
+    }
+
+    public static void setCptFilms(int cptFilms) {
+        BoxOfficeHash.cptFilms = cptFilms;
     }
 
     @Override
@@ -35,8 +44,10 @@ public class BoxOfficeHash extends BoxOffice {
                 tmp.setNext(new FilmChaine(titre, réalisateur, année, nbEntrées));
             }else
                 elements[index(titre)].setNext(new FilmChaine(titre, réalisateur, année, nbEntrées));
-        } else
+        } else{
             elements[index(titre)] = new FilmChaine(titre, réalisateur, année, nbEntrées);
+            setCptFilms(getCptFilms() +1);
+        }
     }
 
     public int index(String titre){
@@ -64,19 +75,6 @@ public class BoxOfficeHash extends BoxOffice {
                         top3.remove(3);
                 }
             }
-            if (film.getNext() != null) {
-                FilmChaine tmp = film;
-                while (tmp.getNext() != null){
-                    if (tmp.getNext().getNbEntrées() >= top3.get(top3.size()-1).getNbEntrées()){
-                        top3.add(tmp.getNext());
-                        top3.sort(compareFilm);
-                        Collections.reverse(top3);
-                        if (top3.size() > 3)
-                            top3.remove(3);
-                    }
-                    tmp = tmp.getNext();
-                }
-            }
         }
         for (int i = 0 ; i < top3.size() ; i++)
             System.out.println("(" + top3.get(i).getAnnée() + ") " + top3.get(i).getTitre() + " entrées : " + top3.get(i).getNbEntrées());
@@ -90,7 +88,7 @@ public class BoxOfficeHash extends BoxOffice {
             BoxOfficeHash bo = new BoxOfficeHash(args[0]);
             System.out.println("Fichier : " + args[0]);
             System.out.println("Nombre de lignes : " + bo.getNbLine());
-            System.out.println("Nombre de films : " + bo.getNbFilms());
+            System.out.println("Nombre de films : " + bo.getCptFilms());
             System.out.println("----------");
             System.out.println("Films comptabilisant le plus grand nombre d’entrées :");
             bo.top3();
