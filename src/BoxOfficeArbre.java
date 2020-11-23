@@ -7,6 +7,7 @@ public class BoxOfficeArbre extends BoxOffice {
 
     private FilmArbre elements;
     private ArrayList<FilmArbre> top3;
+    private static int cptFilms = 1;
 
     public BoxOfficeArbre(String listing) throws FileNotFoundException {
         super(listing);
@@ -18,6 +19,14 @@ public class BoxOfficeArbre extends BoxOffice {
 
     public void setElements(FilmArbre elements) {
         this.elements = elements;
+    }
+
+    public static int getCptFilms() {
+        return cptFilms;
+    }
+
+    public static void setCptFilms(int cptFilms) {
+        BoxOfficeArbre.cptFilms = cptFilms;
     }
 
     public FilmArbre searchFilm(String titre, FilmArbre racine){
@@ -58,8 +67,10 @@ public class BoxOfficeArbre extends BoxOffice {
                 tmp.setNbEntrées(nbEntrées); // On incrémente son nombre d'entrées.
                 return;
             }
-            else
+            else{
                 ajouterFilm(titre, réalisateur, année, nbEntrées, getElements()); // Sinon, on ajoute le film.
+                setCptFilms(getCptFilms() + 1);
+                }
         }
     }
 
@@ -99,7 +110,7 @@ public class BoxOfficeArbre extends BoxOffice {
             BoxOfficeArbre bo = new BoxOfficeArbre(args[0]);
             System.out.println("Fichier : " + args[0]);
             System.out.println("Nombre de lignes : " + bo.getNbLine());
-            System.out.println("Nombre de films : " + bo.getNbFilms());
+            System.out.println("Nombre de films : " + bo.getCptFilms());
             System.out.println("----------");
             bo.afficherTop3();
             long time = System.currentTimeMillis() - start;
