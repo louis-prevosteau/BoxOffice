@@ -29,8 +29,8 @@ public class BoxOfficeHash extends BoxOffice {
             elements[index(titre)] = new FilmChaine(titre, réalisateur, année, nbEntrées);
             top3 = new ArrayList<FilmChaine>();
             top3.add(elements[index(titre)]);
-        }else if (elements[index(titre)] != null){
-            if (elements[index(titre)].getTitre().equals(titre))
+        }else if (elements[index(titre)] != null){ // Di il y a déjà un film à l'index où l'on doit placé le film.
+            if (elements[index(titre)].getTitre().equals(titre)) // Si c'est le bon film, on incrémente son nmbre d'entrées.
                 elements[index(titre)].setNbEntrées(nbEntrées);
             else if (elements[index(titre)].getNext() != null){
                 FilmChaine tmp = elements[index(titre)];
@@ -50,7 +50,7 @@ public class BoxOfficeHash extends BoxOffice {
         }
     }
 
-    public int index(String titre){
+    public int index(String titre){ // Calcul de l'index du titre en fonction du hashCode.
         int i = titre.hashCode() % SIZE;
         if (i < 0)
             i = i * -1;

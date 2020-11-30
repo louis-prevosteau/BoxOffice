@@ -89,9 +89,9 @@ public class BoxOfficeArbre extends BoxOffice {
             if (top3.size() > 3)
                 top3.remove(3);
         }
-        if (racine.getLeft() != null)
+        if (racine.getLeft() != null) // Si il y a un fils gauche, on trie le fils gauche.
             top3(racine.getLeft());
-        if (racine.getRight() != null)
+        if (racine.getRight() != null) // Si il y a un fils droit, on trie le fils droit.
             top3(racine.getRight());
     }
 
