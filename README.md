@@ -8,9 +8,16 @@ A l'aide des structures de données suivantes : Tableau, Liste Chaînée, Arbre 
 
 ### Résultats des Tests (Temps d'execution)
 
-###### Fichier : hard_1990_2015.box
+###### Fichier : hard_1990-2015.box
 
 - Tableau : 5.58 sec
 - Liste Chaînée : 4.13 sec
 - ABR : 2.7 sec
 - Table de Hachage : 2.16 sec
+
+###### Fichier : medium_2010-2015.box
+
+- Tableau : 2.26 sec
+- Liste Chaînée : 1.38 sec
+- ABR : 1.34 sec
+- Table de Hachage : 1.27 sec
