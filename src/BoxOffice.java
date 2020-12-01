@@ -6,7 +6,6 @@ public abstract class BoxOffice {
 
     private String listing;
     private int nbLine;
-    private int nbFilms;
 
     public BoxOffice(String listing) {
        try {
@@ -27,13 +26,6 @@ public abstract class BoxOffice {
                String tmp2 = film[4].substring(9);
                int nbEtrées = Integer.parseInt(tmp2);
                addFilm(titre,réalisateur,année,nbEtrées);
-               Scanner scannerFilm = new Scanner(line);
-               while (scannerFilm.hasNext()){
-                   String myFilm = scannerFilm.next();
-                   nbFilms++;
-               }
-               scannerFilm.close();
-
            }
            in.close();
        }catch (FileNotFoundException e){
@@ -45,10 +37,6 @@ public abstract class BoxOffice {
 
     public int getNbLine() {
         return nbLine;
-    }
-
-    public int getNbFilms() {
-        return nbFilms;
     }
 
     public abstract void addFilm(String titre, String réalisateur, int année, int nbEntrées);
