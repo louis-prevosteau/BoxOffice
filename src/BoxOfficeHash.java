@@ -7,7 +7,7 @@ public class BoxOfficeHash extends BoxOffice {
 
     private FilmChaine[] elements;
     private ArrayList<FilmChaine> top3;
-    private static int cptFilms = 1;
+    private static int cptFilms = 0;
     public final int SIZE = 1000000;
 
     public BoxOfficeHash(String listing) throws FileNotFoundException {
@@ -29,7 +29,8 @@ public class BoxOfficeHash extends BoxOffice {
             elements[index(titre)] = new FilmChaine(titre, réalisateur, année, nbEntrées);
             top3 = new ArrayList<FilmChaine>();
             top3.add(elements[index(titre)]);
-        }else if (elements[index(titre)] != null){ // Di il y a déjà un film à l'index où l'on doit placé le film.
+            setCptFilms(getCptFilms() +1);
+        }else if (elements[index(titre)] != null){ // Si il y a déjà un film à l'index où l'on doit placé le film.
             if (elements[index(titre)].getTitre().equals(titre)) // Si c'est le bon film, on incrémente son nmbre d'entrées.
                 elements[index(titre)].setNbEntrées(nbEntrées);
             else if (elements[index(titre)].getNext() != null){

@@ -7,7 +7,7 @@ public class BoxOfficeArbre extends BoxOffice {
 
     private FilmArbre elements;
     private ArrayList<FilmArbre> top3;
-    private static int cptFilms = 1;
+    private static int cptFilms = 0;
 
     public BoxOfficeArbre(String listing) throws FileNotFoundException {
         super(listing);
@@ -61,6 +61,7 @@ public class BoxOfficeArbre extends BoxOffice {
             setElements(new FilmArbre(titre, réalisateur, année, nbEntrées));
             top3 = new ArrayList<FilmArbre>();
             top3.add(getElements());
+            setCptFilms(getCptFilms() + 1);
         }else {
             FilmArbre tmp = searchFilm(titre, getElements()); // Dans le cas où le film est trouvé, tmp pointera vers le film équivalant.
             if (tmp != null){ // Si le film est trouvé,

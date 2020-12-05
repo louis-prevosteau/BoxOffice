@@ -7,7 +7,7 @@ public class BoxOfficeChaine extends BoxOffice{
 
     private FilmChaine elements;
     private ArrayList<Film> top3;
-    private static int cptFilm = 1;
+    private static int cptFilm = 0;
 
     public BoxOfficeChaine(String listing) throws FileNotFoundException {
         super(listing);
@@ -29,6 +29,7 @@ public class BoxOfficeChaine extends BoxOffice{
     public void addFilm(String titre, String réalisateur, int année, int nbEntrées) {
         if (elements == null){
             elements = new FilmChaine(titre, réalisateur, année, nbEntrées); // Si la liste chainée n'existe pas, on la créé.
+            setCptFilm(getCptFilm() + 1);
         }
         FilmChaine tmp = getElements();
         FilmChaine previous = getElements();
