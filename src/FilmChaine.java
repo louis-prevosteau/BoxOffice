@@ -1,6 +1,6 @@
 public class FilmChaine extends Film {
 
-    private FilmChaine previous, next;
+    private FilmChaine next;
 
     public FilmChaine(String titre, String réalisateur, int année, int nbEntrées, FilmChaine next) {
         super(titre, réalisateur, année, nbEntrées);
@@ -9,14 +9,6 @@ public class FilmChaine extends Film {
 
     public FilmChaine(String titre, String réalisateur, int année, int nbEntrées){
         this(titre, réalisateur, année, nbEntrées, null);
-    }
-
-    public FilmChaine getPrevious() {
-        return previous;
-    }
-
-    public void setPrevious(FilmChaine previous) {
-        this.previous = previous;
     }
 
     public FilmChaine getNext() {
