@@ -29,20 +29,20 @@ public class BoxOfficeArbre extends BoxOffice {
         BoxOfficeArbre.cptFilms = cptFilms;
     }
 
-    public FilmArbre searchFilm(String titre, FilmArbre racine){
+    public FilmArbre searchFilm(String titre, int année, FilmArbre racine){
         if (racine != null){
-            if (titre.hashCode() == racine.key()) // Film trouvé.
+            if (titre.hashCode() + année == racine.key()) // Film trouvé.
                 return racine;
-            else if (titre.hashCode() >= racine.key()) // Si le film recherché a un plus grand hashCode, on part à droite.
-                return searchFilm(titre, racine.getRight());
-            else if (titre.hashCode() < racine.key()) // Sinon, on part à gauche.
-                return searchFilm(titre, racine.getLeft());
+            else if (titre.hashCode() + année >= racine.key()) // Si le film recherché a un plus grand hashCode, on part à droite.
+                return searchFilm(titre, année, racine.getRight());
+            else if (titre.hashCode() + année < racine.key()) // Sinon, on part à gauche.
+                return searchFilm(titre, année, racine.getLeft());
         }
         return null;
     }
 
     public void ajouterFilm(String titre, String réalisateur, int année, int nbEntrées, FilmArbre racine){
-        if(titre.hashCode() >= racine.key()){ // Si le film a un plus grand hashCode que le film pointé, alors on va le placer à sa droite.
+        if(titre.hashCode() + année >= racine.key()){ // Si le film a un plus grand hashCode que le film pointé, alors on va le placer à sa droite.
             if (racine.getRight() == null) // Si le film pointé n'a pas déjà un fils droit, on l'ajoute en fils droit.
                 racine.setRight(new FilmArbre(titre, réalisateur, année, nbEntrées));
             else // Sinon, on pointe le fils droit et on recommence.
@@ -63,7 +63,7 @@ public class BoxOfficeArbre extends BoxOffice {
             top3.add(getElements());
             setCptFilms(getCptFilms() + 1);
         }else {
-            FilmArbre tmp = searchFilm(titre, getElements()); // Dans le cas où le film est trouvé, tmp pointera vers le film équivalant.
+            FilmArbre tmp = searchFilm(titre, année, getElements()); // Dans le cas où le film est trouvé, tmp pointera vers le film équivalant.
             if (tmp != null){ // Si le film est trouvé,
                 tmp.setNbEntrées(nbEntrées); // On incrémente son nombre d'entrées.
                 return;

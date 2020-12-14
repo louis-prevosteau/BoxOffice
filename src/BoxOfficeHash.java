@@ -26,33 +26,33 @@ public class BoxOfficeHash extends BoxOffice {
     public void addFilm(String titre, String réalisateur, int année, int nbEntrées) {
         if (elements == null){
             elements = new FilmChaine[SIZE];
-            elements[index(titre)] = new FilmChaine(titre, réalisateur, année, nbEntrées);
+            elements[index(titre, année)] = new FilmChaine(titre, réalisateur, année, nbEntrées);
             top3 = new ArrayList<FilmChaine>();
-            top3.add(elements[index(titre)]);
+            top3.add(elements[index(titre, année)]);
             setCptFilms(getCptFilms() +1);
-        }else if (elements[index(titre)] != null){ // Si il y a déjà un film à l'index où l'on doit placé le film.
-            if (elements[index(titre)].getTitre().equals(titre)) // Si c'est le bon film, on incrémente son nmbre d'entrées.
-                elements[index(titre)].setNbEntrées(nbEntrées);
-            else if (elements[index(titre)].getNext() != null){
-                FilmChaine tmp = elements[index(titre)];
-                while (tmp.getNext() != null){
-                    if (tmp.getTitre().equals(titre)){
-                        tmp.getNext().setNbEntrées(nbEntrées);
+        }else if (elements[index(titre, année)] != null){ // Si il y a déjà un film à l'index où l'on doit placé le film.
+            if (elements[index(titre, année)].getTitre().equals(titre) && elements[index(titre, année)].getAnnée() == année) // Si c'est le bon film, on incrémente son nmbre d'entrées.
+                elements[index(titre, année)].setNbEntrées(nbEntrées);
+            else if (elements[index(titre, année)].getNext() != null){
+                FilmChaine tmp = elements[index(titre, année)];
+                while (tmp != null){
+                    if (tmp.getTitre().equals(titre) && tmp.getAnnée() == année){
+                        tmp.setNbEntrées(nbEntrées);
                         return;
                     }
                     tmp = tmp.getNext();
                 }
                 tmp.setNext(new FilmChaine(titre, réalisateur, année, nbEntrées));
             }else
-                elements[index(titre)].setNext(new FilmChaine(titre, réalisateur, année, nbEntrées));
+                elements[index(titre, année)].setNext(new FilmChaine(titre, réalisateur, année, nbEntrées));
         } else{
-            elements[index(titre)] = new FilmChaine(titre, réalisateur, année, nbEntrées);
+            elements[index(titre, année)] = new FilmChaine(titre, réalisateur, année, nbEntrées);
             setCptFilms(getCptFilms() +1);
         }
     }
 
-    public int index(String titre){ // Calcul de l'index du titre en fonction du hashCode.
-        int i = titre.hashCode() % SIZE;
+    public int index(String titre, int année){ // Calcul de l'index du titre en fonction du hashCode.
+        int i = (titre.hashCode() + année) % SIZE;
         if (i < 0)
             i = i * -1;
         return i;

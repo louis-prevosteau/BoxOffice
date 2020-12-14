@@ -34,8 +34,8 @@ public class BoxOfficeChaine extends BoxOffice{
         FilmChaine tmp = getElements();
         FilmChaine previous = getElements();
         while (tmp != null){
-            if (tmp.getTitre().equals(titre) && tmp.getRéalisateur().equals(réalisateur)){ // Si le film est dans la liste chainée,
-                tmp.setNbEntrées(nbEntrées); // On incrémente son nombre d'entrées.
+            if (tmp.getTitre().equals(titre) && tmp.getRéalisateur().equals(réalisateur) && tmp.getAnnée() == année){ // Si le film est dans la liste chainée,
+                tmp.setNbEntrées(nbEntrées); // On augmente son nombre d'entrées.
                 return;
             }
             previous = tmp;

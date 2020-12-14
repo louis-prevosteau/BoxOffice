@@ -32,7 +32,7 @@ public class BoxOfficeTableau extends BoxOffice {
             }else{
                 boolean add = false;
                 for (int i = 0 ; i < getCptFilm() ; i++){
-                    if (elements[i].getTitre().equals(titre) && elements[i].getRéalisateur().equals(réalisateur)){ // Si le film est déjà dans le tableau,
+                    if (elements[i].getTitre().equals(titre) && elements[i].getRéalisateur().equals(réalisateur) && elements[i].getAnnée() == année){ // Si le film est déjà dans le tableau,
                         elements[i].setNbEntrées(nbEntrées); // On augmente son nombre d'entrées.
                         add = true;
                     }
@@ -45,7 +45,7 @@ public class BoxOfficeTableau extends BoxOffice {
             }
         }else{ // Si le tableau est rempli,
             Film[] tmp = elements;
-            elements = new Film[tmp.length * 2]; // On ultiplie la taille du tableau par 2.
+            elements = new Film[tmp.length * 2]; // On multiplie la taille du tableau par 2.
             for (int i = 0 ; i < tmp.length ; i++)
                 elements[i] = tmp[i];
         }

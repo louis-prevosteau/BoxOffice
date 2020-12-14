@@ -31,6 +31,6 @@ public class FilmArbre extends Film {
     }
 
     public int key(){
-        return getTitre().hashCode();
+        return getTitre().hashCode() + getAnnée();
     }
 }
