@@ -4,6 +4,9 @@ import boxoffice.BoxOffice;
 import boxoffice.utils.Film;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * @author PREVOSTEAU Louis
@@ -13,6 +16,7 @@ public class BoxOfficeTableau extends BoxOffice {
 
     public final static int SIZE = 100;
     private Film[] elements;
+    private ArrayList<Film> top3;
     private static int cptFilm;
 
     public BoxOfficeTableau(String listing) throws FileNotFoundException {
@@ -60,26 +64,28 @@ public class BoxOfficeTableau extends BoxOffice {
         }
     }
 
-    public void swap(int a, int b){
-        Film tmp = new Film(elements[a].getTitre(), elements[a].getRéalisateur(), elements[a].getAnnée(), elements[a].getNbEntrées());
-        elements[a] = new Film(elements[b].getTitre(), elements[b].getRéalisateur(), elements[b].getAnnée(), elements[b].getNbEntrées());
-        elements[b] = tmp;
-    }
-
-    public void triNbEntréesDESC(){
-        for (int i = 1 ; i < getCptFilm() ; i++){
-            int cpt = i;
-            while (cpt > 0 && elements[cpt].getNbEntrées() > elements[cpt - 1].getNbEntrées()){ // Si cpt est plus grand que cpt - 1,
-                swap(cpt, cpt-1); // On échange cpt et cpt - 1
-                cpt--;
-            }
+    public static Comparator<Film> compareFilm = new Comparator<Film>() {
+        @Override
+        public int compare(Film f1, Film f2) {
+            return f1.getNbEntrées() - f2.getNbEntrées();
         }
-    }
+    };
 
     public void top3(){
-        triNbEntréesDESC(); // Tri
-        for (int i = 0 ; i < 3 ; i++){
-            System.out.println("(" + elements[i].getAnnée() + ") " + elements[i].getTitre() + " entrées : " + elements[i].getNbEntrées()); // Affichage
+        top3 = new ArrayList<Film>();
+        top3.add(elements[0]);
+        for (Film film : elements){
+            if (film == null)
+                break;
+            if (film.getNbEntrées() >= top3.get(top3.size()-1).getNbEntrées()){
+                top3.add(film);
+                top3.sort(compareFilm);
+                Collections.reverse(top3);
+                if (top3.size() > 3)
+                    top3.remove(3);
+            }
         }
+        for (int i = 0 ; i < top3.size() ; i++)
+            System.out.println("(" + top3.get(i).getAnnée() + ") " + top3.get(i).getTitre() + " entrées : " + top3.get(i).getNbEntrées());
     }
 }
