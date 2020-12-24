@@ -5,6 +5,10 @@ import boxoffice.utils.Film;
 
 import java.io.FileNotFoundException;
 
+/**
+ * @author PREVOSTEAU Louis
+ */
+
 public class BoxOfficeTableau extends BoxOffice {
 
     public final static int SIZE = 100;
@@ -76,23 +80,6 @@ public class BoxOfficeTableau extends BoxOffice {
         triNbEntréesDESC(); // Tri
         for (int i = 0 ; i < 3 ; i++){
             System.out.println("(" + elements[i].getAnnée() + ") " + elements[i].getTitre() + " entrées : " + elements[i].getNbEntrées()); // Affichage
-        }
-    }
-
-    public static void main(String[] args) throws FileNotFoundException{
-        if (args.length < 1)
-            System.out.println("Pas de fichier");
-        else {
-            long start = System.currentTimeMillis();
-            BoxOfficeTableau bo = new BoxOfficeTableau(args[0]);
-            System.out.println("Fichier : " + args[0]);
-            System.out.println("Nombre de lignes : " + bo.getNbLine());
-            System.out.println("Nombre de films : " + bo.getCptFilm());
-            System.out.println("----------");
-            System.out.println("Films comptabilisant le plus grand nombre d’entrées :");
-            bo.top3();
-            long time = System.currentTimeMillis() - start;
-            System.out.println("Temps d'execution : " + time + "ms");
         }
     }
 }

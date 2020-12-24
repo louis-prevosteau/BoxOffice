@@ -1,5 +1,9 @@
 package boxoffice.utils;
 
+/**
+ * @author PREVOSTEAU Louis
+ */
+
 public class Film {
 
     private String titre, réalisateur;

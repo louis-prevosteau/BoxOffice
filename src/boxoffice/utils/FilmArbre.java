@@ -1,5 +1,9 @@
 package boxoffice.utils;
 
+/**
+ * @author PREVOSTEAU Louis
+ */
+
 public class FilmArbre extends Film {
 
     private FilmArbre left, right;

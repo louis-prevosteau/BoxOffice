@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * @author PREVOSTEAU Louis
+ */
+
 public abstract class BoxOffice {
 
-    private String listing;
     private int nbLine;
 
     public BoxOffice(String listing) {

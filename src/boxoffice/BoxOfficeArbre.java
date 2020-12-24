@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * @author PREVOSTEAU Louis
+ */
+
 public class BoxOfficeArbre extends BoxOffice {
 
     private FilmArbre elements;
@@ -106,21 +110,5 @@ public class BoxOfficeArbre extends BoxOffice {
         System.out.println("Films comptabilisant le plus grand nombre d’entrées :");
         for (int i = 0 ; i < top3.size() ; i++)
             System.out.println("(" + top3.get(i).getAnnée() + ") " + top3.get(i).getTitre() + " entrées : " + top3.get(i).getNbEntrées());
-    }
-
-    public static void main(String[] args) throws FileNotFoundException{
-        if (args.length < 1)
-            System.out.println("Pas de fichier");
-        else{
-            long start = System.currentTimeMillis();
-            BoxOfficeArbre bo = new BoxOfficeArbre(args[0]);
-            System.out.println("Fichier : " + args[0]);
-            System.out.println("Nombre de lignes : " + bo.getNbLine());
-            System.out.println("Nombre de films : " + bo.getCptFilms());
-            System.out.println("----------");
-            bo.afficherTop3();
-            long time = System.currentTimeMillis() - start;
-            System.out.println("Temps d'execution : " + time + "ms");
-        }
     }
 }
