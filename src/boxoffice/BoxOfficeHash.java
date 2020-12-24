@@ -1,3 +1,8 @@
+package boxoffice;
+
+import boxoffice.BoxOffice;
+import boxoffice.utils.FilmChaine;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +36,7 @@ public class BoxOfficeHash extends BoxOffice {
             top3.add(elements[index(titre, année)]);
             setCptFilms(getCptFilms() +1);
         }else if (elements[index(titre, année)] != null){ // Si il y a déjà un film à l'index où l'on doit placé le film.
-            if (elements[index(titre, année)].getTitre().equals(titre) && elements[index(titre, année)].getAnnée() == année) // Si c'est le bon film, on incrémente son nmbre d'entrées.
+            if (elements[index(titre, année)].getTitre().equals(titre) && elements[index(titre, année)].getAnnée() == année) // Si c'est le bon film, on augmente son nombre d'entrées.
                 elements[index(titre, année)].setNbEntrées(nbEntrées);
             else if (elements[index(titre, année)].getNext() != null){
                 FilmChaine tmp = elements[index(titre, année)];

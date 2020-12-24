@@ -1,3 +1,5 @@
+package boxoffice.utils;
+
 public class FilmChaine extends Film {
 
     private FilmChaine next;

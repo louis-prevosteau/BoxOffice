@@ -1,9 +1,15 @@
+package boxoffice;
+
+import boxoffice.BoxOffice;
+import boxoffice.utils.Film;
+import boxoffice.utils.FilmChaine;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class BoxOfficeChaine extends BoxOffice{
+public class BoxOfficeChaine extends BoxOffice {
 
     private FilmChaine elements;
     private ArrayList<Film> top3;

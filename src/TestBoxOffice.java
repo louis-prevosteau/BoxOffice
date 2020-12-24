@@ -1,3 +1,5 @@
+import boxoffice.BoxOffice;
+
 import java.io.FileNotFoundException;
 
 public class TestBoxOffice extends BoxOffice {

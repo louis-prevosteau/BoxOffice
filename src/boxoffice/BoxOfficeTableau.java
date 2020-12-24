@@ -1,3 +1,8 @@
+package boxoffice;
+
+import boxoffice.BoxOffice;
+import boxoffice.utils.Film;
+
 import java.io.FileNotFoundException;
 
 public class BoxOfficeTableau extends BoxOffice {

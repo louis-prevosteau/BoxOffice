@@ -1,3 +1,5 @@
+package boxoffice.utils;
+
 public class FilmArbre extends Film {
 
     private FilmArbre left, right;

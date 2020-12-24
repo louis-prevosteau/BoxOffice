@@ -1,3 +1,5 @@
+package boxoffice.utils;
+
 public class Film {
 
     private String titre, réalisateur;
