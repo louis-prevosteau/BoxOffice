@@ -20,6 +20,7 @@ public class TestBoxOffice extends BoxOffice {
     public static void main(String[] args) {
         try {
             System.out.println("Fichier : " + args[0] + "\n");
+            new TestBoxOffice(args[0]);
             long startTab = System.currentTimeMillis();
             BoxOfficeTableau boTab = new BoxOfficeTableau(args[0]); // Tableau
             System.out.println("Nombre de lignes : " + boTab.getNbLine());

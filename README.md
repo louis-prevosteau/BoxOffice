@@ -14,14 +14,14 @@ A l'aide des structures de données suivantes : Tableau, Liste Chaînée, Arbre 
 
 ###### Fichier : hard_1990-2015.box
 
-- Tableau : 5.66 sec
-- Liste Chaînée : 3.17 sec
-- ABR : 1.26 sec
-- Table de Hachage : 1.24 sec
+- Tableau : 4.31 sec
+- Liste Chaînée : 3.27 sec
+- ABR : 1.39 sec
+- Table de Hachage : 1.31 sec
 
 ###### Fichier : medium_2010-2015.box
 
-- Tableau : 1.39 sec
-- Liste Chaînée : 0.86 sec
-- ABR : 0.87 sec
-- Table de Hachage : 0.75 sec
+- Tableau : 1.34 sec
+- Liste Chaînée : 1.08 sec
+- ABR : 0.81 sec
+- Table de Hachage : 0.57 sec
