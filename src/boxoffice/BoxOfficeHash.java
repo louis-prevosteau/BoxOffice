@@ -1,6 +1,5 @@
 package boxoffice;
 
-import boxoffice.BoxOffice;
 import boxoffice.utils.FilmChaine;
 
 import java.io.FileNotFoundException;
@@ -60,14 +59,14 @@ public class BoxOfficeHash extends BoxOffice {
         }
     }
 
-    public int index(String titre, int année){ // Calcul de l'index du titre en fonction du hashCode.
+    public int index(String titre, int année){ // Calcul de l'index du film en fonction du hashCode du titre et de l'année.
         int i = (titre.hashCode() + année) % SIZE;
         if (i < 0)
-            i = i * -1;
+            i = i * -1; // L'index doit toujours être positif.
         return i;
     }
 
-    public static Comparator<FilmChaine> compareFilm = new Comparator<FilmChaine>() {
+    public static Comparator<FilmChaine> compareFilm = new Comparator<FilmChaine>() { // Comparateur du nombre d'entrées
         @Override
         public int compare(FilmChaine f1, FilmChaine f2) {
             return f1.getNbEntrées() - f2.getNbEntrées();
@@ -77,11 +76,11 @@ public class BoxOfficeHash extends BoxOffice {
     public void top3(){
         for (FilmChaine film : elements){
             if (film != null){
-                if (film.getNbEntrées() >= top3.get(top3.size()-1).getNbEntrées()){
-                    top3.add(film);
-                    top3.sort(compareFilm);
-                    Collections.reverse(top3);
-                    if (top3.size() > 3)
+                if (film.getNbEntrées() >= top3.get(top3.size()-1).getNbEntrées()){ // Si le film regardé a un plus grand nombre d'entrées que le dernier film du classement.
+                    top3.add(film); // On ajoute le film.
+                    top3.sort(compareFilm); // On trie le classement.
+                    Collections.reverse(top3); // On inverse le classement.
+                    if (top3.size() > 3) // Si size() est supérieur à 3, alors on ne garde que les 3 premiers films.
                         top3.remove(3);
                 }
             }

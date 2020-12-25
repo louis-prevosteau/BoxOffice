@@ -35,8 +35,10 @@ public abstract class BoxOffice {
            in.close();
        }catch (FileNotFoundException e){
            e.printStackTrace();
+           System.exit(1);
        }catch (NumberFormatException e){
            e.printStackTrace();
+           System.exit(1);
        }
     }
 

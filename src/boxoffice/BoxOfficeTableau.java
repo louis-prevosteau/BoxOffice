@@ -1,6 +1,5 @@
 package boxoffice;
 
-import boxoffice.BoxOffice;
 import boxoffice.utils.Film;
 
 import java.io.FileNotFoundException;
@@ -50,7 +49,7 @@ public class BoxOfficeTableau extends BoxOffice {
                         add = true;
                     }
                 }
-                if (add == false){
+                if (add == false){ // Si le film n'a pas été trouvé, on l'ajoute à la fin du tableau.
                     Film newFilm = new Film(titre, réalisateur,année,nbEntrées);
                     elements[getCptFilm()] = newFilm;
                     setCptFilm(getCptFilm() + 1);
@@ -64,7 +63,7 @@ public class BoxOfficeTableau extends BoxOffice {
         }
     }
 
-    public static Comparator<Film> compareFilm = new Comparator<Film>() {
+    public static Comparator<Film> compareFilm = new Comparator<Film>() { // Comparateur du nombre d'entrées
         @Override
         public int compare(Film f1, Film f2) {
             return f1.getNbEntrées() - f2.getNbEntrées();
@@ -77,15 +76,15 @@ public class BoxOfficeTableau extends BoxOffice {
         for (Film film : elements){
             if (film == null)
                 break;
-            if (film.getNbEntrées() >= top3.get(top3.size()-1).getNbEntrées()){
-                top3.add(film);
-                top3.sort(compareFilm);
-                Collections.reverse(top3);
-                if (top3.size() > 3)
+            if (film.getNbEntrées() >= top3.get(top3.size()-1).getNbEntrées()){ // Si le film regardé a un plus grand nombre d'entrées que le dernier film du classement.
+                top3.add(film); // On ajoute le film
+                top3.sort(compareFilm); // On trie le classement.
+                Collections.reverse(top3); // On inverse le classement.
+                if (top3.size() > 3) // Si size() est supérieur à 3, alors on ne garde que les 3 premiers films.
                     top3.remove(3);
             }
         }
-        for (int i = 0 ; i < top3.size() ; i++)
+        for (int i = 0 ; i < top3.size() ; i++) // Affichage du classement
             System.out.println("(" + top3.get(i).getAnnée() + ") " + top3.get(i).getTitre() + " entrées : " + top3.get(i).getNbEntrées());
     }
 }

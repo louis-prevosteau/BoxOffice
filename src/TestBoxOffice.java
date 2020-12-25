@@ -17,10 +17,8 @@ public class TestBoxOffice extends BoxOffice {
                 +réalisateur+" Entrees: "+nbEntrées);
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        if (args.length < 1)
-            System.out.println("Pas de fichier");
-        else{
+    public static void main(String[] args) {
+        try {
             System.out.println("Fichier : " + args[0] + "\n");
             long startTab = System.currentTimeMillis();
             BoxOfficeTableau boTab = new BoxOfficeTableau(args[0]); // Tableau
@@ -60,6 +58,9 @@ public class TestBoxOffice extends BoxOffice {
             boHash.top3();
             long timeHash = System.currentTimeMillis() - startHash;
             System.out.println("Temps d'execution : " + timeHash + "ms\n");
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+            System.exit(1);
         }
     }
 }

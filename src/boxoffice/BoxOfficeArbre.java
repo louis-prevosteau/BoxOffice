@@ -1,6 +1,5 @@
 package boxoffice;
 
-import boxoffice.BoxOffice;
 import boxoffice.utils.FilmArbre;
 
 import java.io.FileNotFoundException;
@@ -40,7 +39,7 @@ public class BoxOfficeArbre extends BoxOffice {
 
     public FilmArbre searchFilm(String titre, int année, FilmArbre racine){
         if (racine != null){
-            if (titre.hashCode() + année == racine.key()) // boxoffice.utils.Film trouvé.
+            if (titre.hashCode() + année == racine.key()) // Film trouvé.
                 return racine;
             else if (titre.hashCode() + année >= racine.key()) // Si le film recherché a un plus grand hashCode, on part à droite.
                 return searchFilm(titre, année, racine.getRight());

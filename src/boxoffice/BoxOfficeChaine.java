@@ -1,6 +1,5 @@
 package boxoffice;
 
-import boxoffice.BoxOffice;
 import boxoffice.utils.Film;
 import boxoffice.utils.FilmChaine;
 
@@ -55,7 +54,7 @@ public class BoxOfficeChaine extends BoxOffice {
         setCptFilm(getCptFilm() + 1);
     }
 
-    public static Comparator<Film> compareFilm = new Comparator<Film>() { // Comparateur du ombre d'entrées
+    public static Comparator<Film> compareFilm = new Comparator<Film>() { // Comparateur du nombre d'entrées
         @Override
         public int compare(Film f1, Film f2) {
             return f1.getNbEntrées() - f2.getNbEntrées();
@@ -67,16 +66,16 @@ public class BoxOfficeChaine extends BoxOffice {
         top3.add(getElements());
         FilmChaine tmp = getElements();
         while (tmp != null){
-            if (tmp.getNbEntrées() >= top3.get(top3.size() - 1).getNbEntrées()){
-                top3.add(tmp);
-                top3.sort(compareFilm);
-                Collections.reverse(top3);
+            if (tmp.getNbEntrées() >= top3.get(top3.size() - 1).getNbEntrées()){ // Si le film regardé a un plus grand nombre d'entrées que le dernier film du classement.
+                top3.add(tmp); // On ajoute le film.
+                top3.sort(compareFilm); // On trie le classement.
+                Collections.reverse(top3); // On inverse le classement.
                 if (top3.size() > 3) // Si size() est supérieur à 3, alors on ne garde que les 3 premiers films.
                     top3.remove(3);
             }
             tmp = tmp.getNext();
         }
-        for (int i = 0 ; i < top3.size() ; i++)
+        for (int i = 0 ; i < top3.size() ; i++) // Affichage
             System.out.println("(" + top3.get(i).getAnnée() + ") " + top3.get(i).getTitre() + " entrées : " + top3.get(i).getNbEntrées());
     }
 }
