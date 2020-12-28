@@ -51,8 +51,10 @@ public class BoxOfficeHash extends BoxOffice {
                     tmp = tmp.getNext();
                 }
                 tmp.setNext(new FilmChaine(titre, réalisateur, année, nbEntrées));
-            }else
+            }else{
                 elements[index(titre, année)].setNext(new FilmChaine(titre, réalisateur, année, nbEntrées));
+                setCptFilms(getCptFilms() +1);
+            }
         } else{
             elements[index(titre, année)] = new FilmChaine(titre, réalisateur, année, nbEntrées);
             setCptFilms(getCptFilms() +1);
