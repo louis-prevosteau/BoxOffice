@@ -39,4 +39,25 @@ public class FilmArbre extends Film {
     public int key(){
         return getTitre().hashCode() + getAnnée();
     }
+
+    public int height(){
+        int leftHeight = 0, rightHeight = 0;
+        if (left != null)
+            leftHeight = left.height();
+        if (right != null)
+            rightHeight = right.height();
+        if (leftHeight > rightHeight)
+            return leftHeight + 1;
+        return rightHeight + 1;
+    }
+
+    public boolean stable(){
+        if (left == null && right == null)
+            return true;
+        if (left == null)
+            return ((right.height() < 2) && right.stable());
+        if (right == null)
+            return ((left.height() <2) && left.stable());
+        return left.stable() && right.stable() && Math.abs(left.height() - right.height()) < 2;
+    }
 }

@@ -109,5 +109,9 @@ public class BoxOfficeArbre extends BoxOffice {
         System.out.println("Films comptabilisant le plus grand nombre d’entrées :");
         for (int i = 0 ; i < top3.size() ; i++)
             System.out.println("(" + top3.get(i).getAnnée() + ") " + top3.get(i).getTitre() + " entrées : " + top3.get(i).getNbEntrées());
+        if (getElements().stable())
+            System.out.println("L'ABR est équilibré.");
+        else
+            System.out.println("L'ABR n'est pas équilibré.");
     }
 }
