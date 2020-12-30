@@ -16,12 +16,12 @@ A l'aide des structures de données suivantes : Tableau, Liste Chaînée, Arbre 
 
 - Tableau : 3.56 sec
 - Liste Chaînée : 2.88 sec
-- ABR : 1.39 sec
-- Table de Hachage : 1.31 sec
+- ABR : 1.34 sec
+- Table de Hachage : 1.25 sec
 
 ###### Fichier : medium_2010-2015.box
 
 - Tableau : 0.87 sec
-- Liste Chaînée : 0.78 sec
+- Liste Chaînée : 0.72 sec
 - ABR : 0.69 sec
-- Table de Hachage : 0.57 sec
+- Table de Hachage : 0.44 sec
