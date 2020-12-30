@@ -40,7 +40,7 @@ public class FilmArbre extends Film {
         return getTitre().hashCode() + getAnnée();
     }
 
-    public int height(){
+    public int height(){ // Calcul de la hauteur de l'ABR
         int leftHeight = 0, rightHeight = 0;
         if (left != null)
             leftHeight = left.height();
@@ -51,7 +51,7 @@ public class FilmArbre extends Film {
         return rightHeight + 1;
     }
 
-    public boolean stable(){
+    public boolean stable(){ // ABR équilibré
         if (left == null && right == null)
             return true;
         if (left == null)
@@ -59,5 +59,9 @@ public class FilmArbre extends Film {
         if (right == null)
             return ((left.height() <2) && left.stable());
         return left.stable() && right.stable() && Math.abs(left.height() - right.height()) < 2;
+        /**
+         * un ABR est équilibré si et seulement si la différence de hauteur de ses fils
+         * (droit et gauche) est inférieur ou égal à 1.
+         */
     }
 }
