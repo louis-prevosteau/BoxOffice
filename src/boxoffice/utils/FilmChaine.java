@@ -8,6 +8,10 @@ public class FilmChaine extends Film {
 
     private FilmChaine next;
 
+    /**
+     * Dans cette liste chaînée, chaque FilmChaine possède un FilmChaine qui le suit (next).
+     */
+
     public FilmChaine(String titre, String réalisateur, int année, int nbEntrées, FilmChaine next) {
         super(titre, réalisateur, année, nbEntrées);
         this.next = next;

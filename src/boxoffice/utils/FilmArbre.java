@@ -8,6 +8,10 @@ public class FilmArbre extends Film {
 
     private FilmArbre left, right;
 
+    /**
+     * Dans cet Arbre Binaire de Recherche, Chaque FilmArbre possède un fils droit (right) et un fils gauche (left).
+     */
+
     public FilmArbre(String titre, String réalisateur, int année, int nbEntrées, FilmArbre left, FilmArbre right) {
         super(titre, réalisateur, année, nbEntrées);
         this.left = left;
@@ -40,6 +44,11 @@ public class FilmArbre extends Film {
         return getTitre().hashCode() + getAnnée();
     }
 
+    /**
+     * Afin de distinguer les remakes de film (titre identique mais réalisateur différent et/ou année de sortie différente),
+     * la méthode key() retourne la somme du hashCode du ttre et de l'année de sortie.
+     */
+
     public int height(){ // Calcul de la hauteur de l'ABR
         int leftHeight = 0, rightHeight = 0;
         if (left != null)
@@ -60,7 +69,7 @@ public class FilmArbre extends Film {
             return ((left.height() <2) && left.stable());
         return left.stable() && right.stable() && Math.abs(left.height() - right.height()) < 2;
         /**
-         * un ABR est équilibré si et seulement si la différence de hauteur de ses fils
+         * Un ABR est équilibré si et seulement si la différence de hauteur de ses fils
          * (droit et gauche) est inférieur ou égal à 1.
          */
     }

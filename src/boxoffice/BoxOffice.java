@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public abstract class BoxOffice {
 
-    private int nbLine;
+    private int nbLine; // Nombre de lignes du fichier
 
     public BoxOffice(String listing) {
        try {

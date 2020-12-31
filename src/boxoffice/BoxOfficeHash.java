@@ -50,8 +50,8 @@ public class BoxOfficeHash extends BoxOffice {
                     }
                     tmp = tmp.getNext();
                 }
-                tmp.setNext(new FilmChaine(titre, réalisateur, année, nbEntrées));
-            }else{
+                tmp.setNext(new FilmChaine(titre, réalisateur, année, nbEntrées)); // Si on ne trouve pas le film dans le chaine, on l'ajoute en bout de chaine
+            }else{ // Si le FilmChaine a la position n'a pas de suivant, on ajoute le nouveau film en suivant.
                 elements[index(titre, année)].setNext(new FilmChaine(titre, réalisateur, année, nbEntrées));
                 setCptFilms(getCptFilms() +1);
             }

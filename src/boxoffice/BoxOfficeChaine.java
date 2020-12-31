@@ -50,7 +50,7 @@ public class BoxOfficeChaine extends BoxOffice {
             previous = tmp;
             tmp = tmp.getNext();
         }
-        previous.setNext(new FilmChaine(titre, réalisateur, année, nbEntrées));
+        previous.setNext(new FilmChaine(titre, réalisateur, année, nbEntrées)); // Si le film n'est pas trouvé, on l'ajoute à la fin de la liste.
         setCptFilm(getCptFilm() + 1);
     }
 
