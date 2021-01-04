@@ -6,21 +6,11 @@ import java.io.FileNotFoundException;
  * @author PREVOSTEAU Louis
  */
 
-public class TestBoxOffice extends BoxOffice {
-
-    public TestBoxOffice(String listing) throws FileNotFoundException{
-        super(listing);
-    }
-
-    public void addFilm(String titre, String réalisateur, int année, int nbEntrées){
-        System.out.println("("+année+") "+titre+" Real.: "
-                +réalisateur+" Entrees: "+nbEntrées);
-    }
+public class TestBoxOffice {
 
     public static void main(String[] args) {
         try {
             System.out.println("Fichier : " + args[0] + "\n");
-            new TestBoxOffice(args[0]);
             System.out.println("----------");
             long startTab = System.currentTimeMillis();
             BoxOfficeTableau boTab = new BoxOfficeTableau(args[0]); // Tableau
