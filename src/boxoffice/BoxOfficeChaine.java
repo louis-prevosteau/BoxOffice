@@ -26,19 +26,11 @@ public class BoxOfficeChaine extends BoxOffice {
         return elements;
     }
 
-    public static int getCptFilm() {
-        return cptFilm;
-    }
-
-    public static void setCptFilm(int cptFilm) {
-        BoxOfficeChaine.cptFilm = cptFilm;
-    }
-
     @Override
     public void addFilm(String titre, String réalisateur, int année, int nbEntrées) {
         if (elements == null){
             elements = new FilmChaine(titre, réalisateur, année, nbEntrées); // Si la liste chainée n'existe pas, on la créé.
-            setCptFilm(getCptFilm() + 1);
+            cptFilm++;
         }
         FilmChaine tmp = getElements();
         FilmChaine previous = getElements();
@@ -51,7 +43,7 @@ public class BoxOfficeChaine extends BoxOffice {
             tmp = tmp.getNext();
         }
         previous.setNext(new FilmChaine(titre, réalisateur, année, nbEntrées)); // Si le film n'est pas trouvé, on l'ajoute à la fin de la liste.
-        setCptFilm(getCptFilm() + 1);
+        cptFilm++;
     }
 
     public static Comparator<Film> compareFilm = new Comparator<Film>() { // Comparateur du nombre d'entrées
@@ -77,5 +69,21 @@ public class BoxOfficeChaine extends BoxOffice {
         }
         for (int i = 0 ; i < top3.size() ; i++) // Affichage
             System.out.println("(" + top3.get(i).getAnnée() + ") " + top3.get(i).getTitre() + " entrées : " + top3.get(i).getNbEntrées());
+    }
+
+    public static void run(String listing){ // éxécution
+        long start = System.currentTimeMillis();
+        try {
+            BoxOfficeChaine box = new BoxOfficeChaine(listing);
+            System.out.println("Nombre de lignes : " + box.getNbLine());
+            System.out.println("Nombre de films : " + box.cptFilm);
+            System.out.println("Films comptabilisant le plus grand nombre d’entrées :");
+            box.top3();
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+            System.exit(1);
+        }
+        long time = System.currentTimeMillis() - start;
+        System.out.println("Temps d'execution : " + time + "ms\n");
     }
 }

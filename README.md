@@ -9,7 +9,7 @@ A l'aide des structures de données suivantes : Tableau, Liste Chaînée, Arbre 
 ### Comment éxecuter le programme
 
 - Sur un IDE (IntelliJ) : éxecuter le fichier TestBoxOffice.java avec le nom d'un ficher test (.box) en argument.
-- Sur un terminal : compiler le fichier TestBoxOffice.java avec `javac TestBoxOffice.java`, puis éxecuter `java TestBoxOffice`.
+- Sur un terminal : compiler le fichier Main.java avec `javac Main.java`, puis éxecuter `java Main <file.box>`.
 ### Résultats des Tests (Temps d'execution variable en fonction du PC)
 
 ###### Fichier : hard_1990-2015.box

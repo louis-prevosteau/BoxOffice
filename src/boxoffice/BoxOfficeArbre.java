@@ -15,7 +15,7 @@ public class BoxOfficeArbre extends BoxOffice {
 
     private FilmArbre elements;
     private ArrayList<FilmArbre> top3;
-    private static int cptFilms = 0;
+    private static int cptFilm = 0;
 
     public BoxOfficeArbre(String listing) throws FileNotFoundException {
         super(listing);
@@ -27,14 +27,6 @@ public class BoxOfficeArbre extends BoxOffice {
 
     public void setElements(FilmArbre elements) {
         this.elements = elements;
-    }
-
-    public static int getCptFilms() {
-        return cptFilms;
-    }
-
-    public static void setCptFilms(int cptFilms) {
-        BoxOfficeArbre.cptFilms = cptFilms;
     }
 
     public FilmArbre searchFilm(String titre, int année, FilmArbre racine){
@@ -69,7 +61,7 @@ public class BoxOfficeArbre extends BoxOffice {
             setElements(new FilmArbre(titre, réalisateur, année, nbEntrées));
             top3 = new ArrayList<FilmArbre>();
             top3.add(getElements());
-            setCptFilms(getCptFilms() + 1);
+            cptFilm++;
         }else {
             FilmArbre tmp = searchFilm(titre, année, getElements()); // Dans le cas où le film est trouvé, tmp pointera vers le film équivalant.
             if (tmp != null){ // Si le film est trouvé,
@@ -78,7 +70,7 @@ public class BoxOfficeArbre extends BoxOffice {
             }
             else{
                 ajouterFilm(titre, réalisateur, année, nbEntrées, getElements()); // Sinon, on ajoute le film.
-                setCptFilms(getCptFilms() + 1);
+                cptFilm++;
                 }
         }
     }
@@ -114,5 +106,20 @@ public class BoxOfficeArbre extends BoxOffice {
             System.out.println("L'ABR est équilibré.");
         else
             System.out.println("L'ABR n'est pas équilibré.");
+    }
+
+    public static void run(String listing){ // éxécution
+        long start = System.currentTimeMillis();
+        try {
+            BoxOfficeArbre box = new BoxOfficeArbre(listing);
+            System.out.println("Nombre de lignes : " + box.getNbLine());
+            System.out.println("Nombre de films : " + box.cptFilm);
+            box.afficherTop3();
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+            System.exit(1);
+        }
+        long time = System.currentTimeMillis() - start;
+        System.out.println("Temps d'execution : " + time + "ms\n");
     }
 }

@@ -46,7 +46,7 @@ public class FilmArbre extends Film {
 
     /**
      * Afin de distinguer les remakes de film (titre identique mais réalisateur différent et/ou année de sortie différente),
-     * la méthode key() retourne la somme du hashCode du ttre et de l'année de sortie.
+     * la méthode key() retourne la somme du hashCode du titre et de l'année de sortie.
      */
 
     public int height(){ // Calcul de la hauteur de l'ABR
