@@ -12,7 +12,7 @@ public class Main {
         System.out.println("----------");
         Scanner input = new Scanner(System.in);
         System.out.print("Entrez une structure de données : ");
-        String struct = input.next();
+        String struct = input.nextLine();
         switch (struct.toLowerCase()){
             case "tableau" :
                 BoxOfficeTableau.run(args[0]);
