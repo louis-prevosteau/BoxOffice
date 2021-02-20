@@ -17,7 +17,7 @@ public class Main {
             case "tableau" :
                 BoxOfficeTableau.run(args[0]);
                 break;
-            case "liste chaînée" :
+            case "chain" :
                 BoxOfficeChaine.run(args[0]);
                 break;
             case "abr" :
@@ -34,7 +34,7 @@ public class Main {
                 break;
             default:
                 System.out.println("Cette structure de données n'existe pas.");
-                System.out.println("Choisissez parmi les structures de données suivantes : Tableau, Liste chaînée, ABR, HashMap ou All.");
+                System.out.println("Choisissez parmi les structures de données suivantes : Tableau, Chain, ABR, HashMap ou All.");
                 break;
         }
         input.close();
