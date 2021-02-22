@@ -121,14 +121,14 @@ public class BoxOfficeArbre extends BoxOffice {
         long start = System.currentTimeMillis();
         try {
             BoxOfficeArbre box = new BoxOfficeArbre(listing);
+            long time = System.currentTimeMillis() - start;
             System.out.println("Nombre de lignes : " + box.getNbLine());
             System.out.println("Nombre de films : " + box.cptFilm);
             box.afficherTop3();
+            System.out.println("Temps d'execution : " + time + "ms");
         }catch (FileNotFoundException e){
             e.printStackTrace();
             System.exit(1);
         }
-        long time = System.currentTimeMillis() - start;
-        System.out.println("Temps d'execution : " + time + "ms\n");
     }
 }

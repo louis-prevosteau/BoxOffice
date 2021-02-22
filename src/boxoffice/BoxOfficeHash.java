@@ -96,15 +96,15 @@ public class BoxOfficeHash extends BoxOffice {
         long start = System.currentTimeMillis();
         try {
             BoxOfficeHash box = new BoxOfficeHash(listing);
+            long time = System.currentTimeMillis() - start;
             System.out.println("Nombre de lignes : " + box.getNbLine());
             System.out.println("Nombre de films : " + box.cptFilm);
             System.out.println("Films comptabilisant le plus grand nombre d’entrées :");
             box.top3();
+            System.out.println("Temps d'execution : " + time + "ms");
         }catch (FileNotFoundException e){
             e.printStackTrace();
             System.exit(1);
         }
-        long time = System.currentTimeMillis() - start;
-        System.out.println("Temps d'execution : " + time + "ms\n");
     }
 }
