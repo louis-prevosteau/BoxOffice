@@ -32,7 +32,13 @@ public class Film {
         return nbEntrées;
     }
 
+    /**
+     * Incrémentation du nombre d'entrées d'un film.
+     *
+     * @param nbEntrées
+     */
+
     public void setNbEntrées(int nbEntrées) {
-        this.nbEntrées += nbEntrées; // On ajoute le nombre d'entrées au nombre d'entrées précédent.
+        this.nbEntrées += nbEntrées;
     }
 }

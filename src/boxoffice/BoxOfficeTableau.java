@@ -14,7 +14,7 @@ import java.util.Comparator;
 public class BoxOfficeTableau extends BoxOffice {
 
     public final static int SIZE = 100;
-    private Film[] elements;
+    private Film[] films;
     private ArrayList<Film> top3;
     private static int cptFilm;
 
@@ -24,34 +24,34 @@ public class BoxOfficeTableau extends BoxOffice {
 
     @Override
     public void addFilm(String titre, String réalisateur, int année, int nbEntrées) {
-        if (elements == null){
-            this.elements = new Film[SIZE]; // Si le tableau elements n'existe pas, on le créé.
+        if (films == null){
+            this.films = new Film[SIZE]; // Si le tableau elements n'existe pas, on le créé.
         }
 
-        if (cptFilm < elements.length){
+        if (cptFilm < films.length){
             if (cptFilm == 0){
                 Film newFilm = new Film(titre, réalisateur, année, nbEntrées); // Si le tableau elements est vide, on créé un film.
-                elements[cptFilm] = newFilm; // On l'ajoute dans le tableau
+                films[cptFilm] = newFilm; // On l'ajoute dans le tableau
                 cptFilm++; // On incrémente le nombre de films dans le tableau.
             }else{
                 boolean add = false;
                 for (int i = 0 ; i < cptFilm ; i++){
-                    if (elements[i].getTitre().equals(titre) && elements[i].getRéalisateur().equals(réalisateur) && elements[i].getAnnée() == année){ // Si le film est déjà dans le tableau,
-                        elements[i].setNbEntrées(nbEntrées); // On augmente son nombre d'entrées.
+                    if (films[i].getTitre().equals(titre) && films[i].getRéalisateur().equals(réalisateur) && films[i].getAnnée() == année){ // Si le film est déjà dans le tableau,
+                        films[i].setNbEntrées(nbEntrées); // On augmente son nombre d'entrées.
                         add = true;
                     }
                 }
                 if (add == false){ // Si le film n'a pas été trouvé, on l'ajoute à la fin du tableau.
                     Film newFilm = new Film(titre, réalisateur,année,nbEntrées);
-                    elements[cptFilm] = newFilm;
+                    films[cptFilm] = newFilm;
                     cptFilm++;
                 }
             }
         }else{ // Si le tableau est rempli,
-            Film[] tmp = elements;
-            elements = new Film[tmp.length * 2]; // On multiplie la taille du tableau par 2.
+            Film[] tmp = films;
+            films = new Film[tmp.length * 2]; // On multiplie la taille du tableau par 2.
             for (int i = 0 ; i < tmp.length ; i++)
-                elements[i] = tmp[i];
+                films[i] = tmp[i];
         }
     }
 
@@ -64,8 +64,8 @@ public class BoxOfficeTableau extends BoxOffice {
 
     public void top3(){
         top3 = new ArrayList<Film>();
-        top3.add(elements[0]);
-        for (Film film : elements){
+        top3.add(films[0]);
+        for (Film film : films){
             if (film == null)
                 break;
             if (film.getNbEntrées() >= top3.get(top3.size()-1).getNbEntrées()){ // Si le film regardé a un plus grand nombre d'entrées que le dernier film du classement.
@@ -80,7 +80,7 @@ public class BoxOfficeTableau extends BoxOffice {
             System.out.println("(" + top3.get(i).getAnnée() + ") " + top3.get(i).getTitre() + " entrées : " + top3.get(i).getNbEntrées());
     }
 
-    public static void run(String listing){ // éxécution
+    public static void run(String listing){
         long start = System.currentTimeMillis();
         try {
             BoxOfficeTableau box = new BoxOfficeTableau(listing);

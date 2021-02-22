@@ -7,6 +7,13 @@ import java.util.Scanner;
 
 public class Main {
 
+    /**
+     * Méthode d'éxécution principale, l'utilisateur peut choisir la structure de données à éxécuter
+     * ou éxécuter toutes les structures de données en même temps (all).
+     *
+     * @param args
+     */
+
     public static void main(String[] args) {
         System.out.println("Fichier : " + args[0]);
         System.out.println("----------");
