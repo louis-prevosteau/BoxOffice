@@ -13,7 +13,7 @@ import java.util.Comparator;
 
 public class BoxOfficeArbre extends BoxOffice {
 
-    private FilmArbre elements;
+    private FilmArbre film;
     private ArrayList<FilmArbre> top3;
     private static int cptFilm = 0;
 
@@ -21,13 +21,22 @@ public class BoxOfficeArbre extends BoxOffice {
         super(listing);
     }
 
-    public FilmArbre getElements() {
-        return elements;
+    public FilmArbre getFilm() {
+        return film;
     }
 
-    public void setElements(FilmArbre elements) {
-        this.elements = elements;
+    public void setFilm(FilmArbre film) {
+        this.film = film;
     }
+
+    /**
+     * Méthode de recherche d'un film à partir d'un film racine.
+     *
+     * @param titre
+     * @param année
+     * @param racine
+     * @return FilmArbre
+     */
 
     public FilmArbre searchFilm(String titre, int année, FilmArbre racine){
         if (racine != null){
@@ -41,35 +50,35 @@ public class BoxOfficeArbre extends BoxOffice {
         return null;
     }
 
-    public void ajouterFilm(String titre, String réalisateur, int année, int nbEntrées, FilmArbre racine){
+    public void pointeurFilm(String titre, String réalisateur, int année, int nbEntrées, FilmArbre racine){
         if(titre.hashCode() + année >= racine.key()){ // Si le film a un plus grand hashCode que le film pointé, alors on va le placer à sa droite.
             if (racine.getRight() == null) // Si le film pointé n'a pas déjà un fils droit, on l'ajoute en fils droit.
                 racine.setRight(new FilmArbre(titre, réalisateur, année, nbEntrées));
             else // Sinon, on pointe le fils droit et on recommence.
-                ajouterFilm(titre, réalisateur, année, nbEntrées, racine.getRight());
+                pointeurFilm(titre, réalisateur, année, nbEntrées, racine.getRight());
         }else { // Si le film a un plus petit hashCode que le film pointé, alors on va le placer à sa gauche.
             if (racine.getLeft() == null) // Si le film pointé n'a pas déjà un fils gauche, on l'ajoute en fils gauche.
                 racine.setLeft(new FilmArbre(titre, réalisateur, année, nbEntrées));
             else // Sinon, on pointe le fils gauche et on recommence.
-                ajouterFilm(titre, réalisateur, année, nbEntrées, racine.getLeft());
+                pointeurFilm(titre, réalisateur, année, nbEntrées, racine.getLeft());
         }
     }
 
     @Override
     public void addFilm(String titre, String réalisateur, int année, int nbEntrées) {
-        if (getElements() == null){
-            setElements(new FilmArbre(titre, réalisateur, année, nbEntrées));
+        if (getFilm() == null){
+            setFilm(new FilmArbre(titre, réalisateur, année, nbEntrées));
             top3 = new ArrayList<FilmArbre>();
-            top3.add(getElements());
+            top3.add(getFilm());
             cptFilm++;
         }else {
-            FilmArbre tmp = searchFilm(titre, année, getElements()); // Dans le cas où le film est trouvé, tmp pointera vers le film équivalant.
+            FilmArbre tmp = searchFilm(titre, année, getFilm()); // Dans le cas où le film est trouvé, tmp pointera vers le film équivalant.
             if (tmp != null){ // Si le film est trouvé,
                 tmp.setNbEntrées(nbEntrées); // On incrémente son nombre d'entrées.
                 return;
             }
             else{
-                ajouterFilm(titre, réalisateur, année, nbEntrées, getElements()); // Sinon, on ajoute le film.
+                pointeurFilm(titre, réalisateur, année, nbEntrées, getFilm()); // Sinon, on ajoute le film.
                 cptFilm++;
                 }
         }
@@ -97,12 +106,12 @@ public class BoxOfficeArbre extends BoxOffice {
     }
 
     public void afficherTop3(){
-        top3(getElements());
+        top3(getFilm());
         System.out.println("Films comptabilisant le plus grand nombre d’entrées :");
         for (int i = 0 ; i < top3.size() ; i++)
             System.out.println("(" + top3.get(i).getAnnée() + ") " + top3.get(i).getTitre() + " entrées : " + top3.get(i).getNbEntrées());
-        System.out.println("Hauteur de l'ABR : " + getElements().height());
-        if (getElements().stable())
+        System.out.println("Hauteur de l'ABR : " + getFilm().height());
+        if (getFilm().stable())
             System.out.println("L'ABR est équilibré.");
         else
             System.out.println("L'ABR n'est pas équilibré.");

@@ -14,7 +14,7 @@ import java.util.Comparator;
 
 public class BoxOfficeChaine extends BoxOffice {
 
-    private FilmChaine elements;
+    private FilmChaine film;
     private ArrayList<Film> top3;
     private static int cptFilm = 0;
 
@@ -22,18 +22,18 @@ public class BoxOfficeChaine extends BoxOffice {
         super(listing);
     }
 
-    public FilmChaine getElements() {
-        return elements;
+    public FilmChaine getFilm() {
+        return film;
     }
 
     @Override
     public void addFilm(String titre, String réalisateur, int année, int nbEntrées) {
-        if (elements == null){
-            elements = new FilmChaine(titre, réalisateur, année, nbEntrées); // Si la liste chainée n'existe pas, on la créé.
+        if (film == null){
+            film = new FilmChaine(titre, réalisateur, année, nbEntrées); // Si la liste chainée n'existe pas, on la créé.
             cptFilm++;
         }
-        FilmChaine tmp = getElements();
-        FilmChaine previous = getElements();
+        FilmChaine tmp = getFilm();
+        FilmChaine previous = getFilm();
         while (tmp != null){
             if (tmp.getTitre().equals(titre) && tmp.getRéalisateur().equals(réalisateur) && tmp.getAnnée() == année){ // Si le film est dans la liste chainée,
                 tmp.setNbEntrées(nbEntrées); // On augmente son nombre d'entrées.
@@ -55,8 +55,8 @@ public class BoxOfficeChaine extends BoxOffice {
 
     public void top3(){
         top3 = new ArrayList<Film>();
-        top3.add(getElements());
-        FilmChaine tmp = getElements();
+        top3.add(getFilm());
+        FilmChaine tmp = getFilm();
         while (tmp != null){
             if (tmp.getNbEntrées() >= top3.get(top3.size() - 1).getNbEntrées()){ // Si le film regardé a un plus grand nombre d'entrées que le dernier film du classement.
                 top3.add(tmp); // On ajoute le film.
@@ -67,11 +67,11 @@ public class BoxOfficeChaine extends BoxOffice {
             }
             tmp = tmp.getNext();
         }
-        for (int i = 0 ; i < top3.size() ; i++) // Affichage
+        for (int i = 0 ; i < top3.size() ; i++) // Affichage du classement
             System.out.println("(" + top3.get(i).getAnnée() + ") " + top3.get(i).getTitre() + " entrées : " + top3.get(i).getNbEntrées());
     }
 
-    public static void run(String listing){ // éxécution
+    public static void run(String listing){
         long start = System.currentTimeMillis();
         try {
             BoxOfficeChaine box = new BoxOfficeChaine(listing);

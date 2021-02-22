@@ -13,7 +13,7 @@ import java.util.Comparator;
 
 public class BoxOfficeHash extends BoxOffice {
 
-    private FilmChaine[] elements;
+    private FilmChaine[] films;
     private ArrayList<FilmChaine> top3;
     private static int cptFilm = 0;
     public final int SIZE = 1000000;
@@ -24,17 +24,17 @@ public class BoxOfficeHash extends BoxOffice {
 
     @Override
     public void addFilm(String titre, String réalisateur, int année, int nbEntrées) {
-        if (elements == null){
-            elements = new FilmChaine[SIZE];
-            elements[index(titre, année)] = new FilmChaine(titre, réalisateur, année, nbEntrées);
+        if (films == null){
+            films = new FilmChaine[SIZE];
+            films[index(titre, année)] = new FilmChaine(titre, réalisateur, année, nbEntrées);
             top3 = new ArrayList<FilmChaine>();
-            top3.add(elements[index(titre, année)]);
+            top3.add(films[index(titre, année)]);
             cptFilm++;
-        }else if (elements[index(titre, année)] != null){ // Si il y a déjà un film à l'index où l'on doit placé le film.
-            if (elements[index(titre, année)].getTitre().equals(titre) && elements[index(titre, année)].getAnnée() == année) // Si c'est le bon film, on augmente son nombre d'entrées.
-                elements[index(titre, année)].setNbEntrées(nbEntrées);
-            else if (elements[index(titre, année)].getNext() != null){
-                FilmChaine tmp = elements[index(titre, année)];
+        }else if (films[index(titre, année)] != null){ // Si il y a déjà un film à l'index où l'on doit placé le film.
+            if (films[index(titre, année)].getTitre().equals(titre) && films[index(titre, année)].getAnnée() == année) // Si c'est le bon film, on augmente son nombre d'entrées.
+                films[index(titre, année)].setNbEntrées(nbEntrées);
+            else if (films[index(titre, année)].getNext() != null){
+                FilmChaine tmp = films[index(titre, année)];
                 while (tmp != null){
                     if (tmp.getTitre().equals(titre) && tmp.getAnnée() == année){
                         tmp.setNbEntrées(nbEntrées);
@@ -44,19 +44,28 @@ public class BoxOfficeHash extends BoxOffice {
                 }
                 tmp.setNext(new FilmChaine(titre, réalisateur, année, nbEntrées)); // Si on ne trouve pas le film dans le chaine, on l'ajoute en bout de chaine
             }else{ // Si le FilmChaine a la position n'a pas de suivant, on ajoute le nouveau film en suivant.
-                elements[index(titre, année)].setNext(new FilmChaine(titre, réalisateur, année, nbEntrées));
+                films[index(titre, année)].setNext(new FilmChaine(titre, réalisateur, année, nbEntrées));
                 cptFilm++;
             }
         } else{
-            elements[index(titre, année)] = new FilmChaine(titre, réalisateur, année, nbEntrées);
+            films[index(titre, année)] = new FilmChaine(titre, réalisateur, année, nbEntrées);
             cptFilm++;
         }
     }
 
-    public int index(String titre, int année){ // Calcul de l'index du film en fonction du hashCode du titre et de l'année.
+    /**
+     * Calcul de l'index d'un film. Un film est rangé dans la table de hachage selon son titre et son année de sortie.
+     * L'index d'un film doit toujours être positif.
+     *
+     * @param titre
+     * @param année
+     * @return int > 0
+     */
+
+    public int index(String titre, int année){
         int i = (titre.hashCode() + année) % SIZE;
         if (i < 0)
-            i = i * -1; // L'index doit toujours être positif.
+            i = i * -1;
         return i;
     }
 
@@ -68,7 +77,7 @@ public class BoxOfficeHash extends BoxOffice {
     };
 
     public void top3(){
-        for (FilmChaine film : elements){
+        for (FilmChaine film : films){
             if (film != null){
                 if (film.getNbEntrées() >= top3.get(top3.size()-1).getNbEntrées()){ // Si le film regardé a un plus grand nombre d'entrées que le dernier film du classement.
                     top3.add(film); // On ajoute le film.
@@ -79,11 +88,11 @@ public class BoxOfficeHash extends BoxOffice {
                 }
             }
         }
-        for (int i = 0 ; i < top3.size() ; i++)
+        for (int i = 0 ; i < top3.size() ; i++) // Affichage du classement
             System.out.println("(" + top3.get(i).getAnnée() + ") " + top3.get(i).getTitre() + " entrées : " + top3.get(i).getNbEntrées());
     }
 
-    public static void run(String listing){ // éxécution
+    public static void run(String listing){
         long start = System.currentTimeMillis();
         try {
             BoxOfficeHash box = new BoxOfficeHash(listing);

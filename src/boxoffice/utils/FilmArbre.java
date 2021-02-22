@@ -40,13 +40,20 @@ public class FilmArbre extends Film {
         this.right = right;
     }
 
+    /**
+     * Afin de distinguer les remakes de film (titre identique mais réalisateur différent et/ou année de sortie différente),
+     * la méthode key() retourne la somme du hashCode du titre et de l'année de sortie.
+     *
+     * @return int
+     */
+
     public int key(){
         return getTitre().hashCode() + getAnnée();
     }
 
     /**
-     * Afin de distinguer les remakes de film (titre identique mais réalisateur différent et/ou année de sortie différente),
-     * la méthode key() retourne la somme du hashCode du titre et de l'année de sortie.
+     * Calcul de la hauteur de l'Arbre Binaire de Recherche
+     * @return hauteur : int
      */
 
     public int height(){ // Calcul de la hauteur de l'ABR
@@ -60,7 +67,14 @@ public class FilmArbre extends Film {
         return rightHeight + 1;
     }
 
-    public boolean stable(){ // ABR équilibré
+    /**
+     * Un ABR est équilibré si et seulement si la différence de hauteur de ses fils
+     * (droit et gauche) est inférieur ou égal à 1.
+     *
+     * @return boolean
+     */
+
+    public boolean stable(){
         if (left == null && right == null)
             return true;
         if (left == null)
@@ -68,9 +82,5 @@ public class FilmArbre extends Film {
         if (right == null)
             return ((left.height() <2) && left.stable());
         return left.stable() && right.stable() && Math.abs(left.height() - right.height()) < 2;
-        /**
-         * Un ABR est équilibré si et seulement si la différence de hauteur de ses fils
-         * (droit et gauche) est inférieur ou égal à 1.
-         */
     }
 }
